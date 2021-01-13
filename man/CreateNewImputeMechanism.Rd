@@ -4,8 +4,12 @@
 \alias{CreateNewImputeMechanism}
 \title{A function which creates an Impute Mechanism object}
 \usage{
-CreateNewImputeMechanism(name, cols.needed = vector("character"), impute,
-  parameters = NULL)
+CreateNewImputeMechanism(
+  name,
+  cols.needed = vector("character"),
+  impute,
+  parameters = NULL
+)
 }
 \arguments{
 \item{name}{The method name (used for printing)}
@@ -21,6 +25,9 @@ and \code{newevent.times} - a list of vectors where the vectors contain the impu
 the vector \code{numeric(0)} is returned.}
 
 \item{parameters}{A list of named parameters describing the method (used for printing) - or NULL if none}
+}
+\value{
+A \code{\link{ImputeMechanism.object}}
 }
 \description{
 A function which creates an Impute Mechanism object

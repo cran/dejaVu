@@ -4,8 +4,13 @@
 \alias{CreateNewDropoutMechanism}
 \title{A function which creates a DropOut Mechanism object}
 \usage{
-CreateNewDropoutMechanism(type, text, cols.needed = vector("character"),
-  GetDropTime, parameters = NULL)
+CreateNewDropoutMechanism(
+  type,
+  text,
+  cols.needed = vector("character"),
+  GetDropTime,
+  parameters = NULL
+)
 }
 \arguments{
 \item{type}{The type of mechanism (e.g. "MCAR" or "MNAR")}
@@ -21,6 +26,9 @@ SingleSim object. This function should return a list of dropout times (if a subj
 their current censored.time (i.e. the study follow up time))}
 
 \item{parameters}{A list of named parameters for the mechanism (only used for printing) or NULL if none}
+}
+\value{
+A \code{\link{DropoutMechanism.object}}
 }
 \description{
 A function which creates a DropOut Mechanism object

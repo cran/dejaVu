@@ -37,16 +37,15 @@
 weighted_j2r <- function(trt.weight,delta=c(1,1)){
   #first validate the arguments
   
-  if(!.internal.is.finite.number(trt.weight) || trt.weight < 0 || trt.weight > 1){
+  if(!.internal.is.finite.number(trt.weight) | (trt.weight < 0) | (trt.weight > 1)){
     stop("Invalid argument trt.weight should be in [0,1]")
   }
 
-  if(!is.numeric(delta) || any(is.na(delta)) || any(is.infinite(delta) || length(delta)!=2 || any(delta<=0))){
+  if(!is.numeric(delta) | any(is.na(delta)) | any(is.infinite(delta)) | (length(delta)!=2) | (any(delta<=0))){
     stop("Invalid argument delta should be a vector of length 2 of positive numbers")
   }
   
-  
-  if(trt.weight!=1 && !all(delta==1)){
+  if((trt.weight!=1) & !all(delta==1)){
     stop("Invalid argument delta must be c(1,1) unless trt.weight=1")  
   }
   

@@ -4,8 +4,15 @@
 \alias{ImportSim}
 \title{Import an existing data frame for use with the package}
 \usage{
-ImportSim(dejaData, event.times, status, study.time, censored.time = NULL,
-  actual.events = NULL, allow.beyond.study = FALSE)
+ImportSim(
+  dejaData,
+  event.times,
+  status,
+  study.time,
+  censored.time = NULL,
+  actual.events = NULL,
+  allow.beyond.study = FALSE
+)
 }
 \arguments{
 \item{dejaData}{a \code{DejaData} object contain the subject

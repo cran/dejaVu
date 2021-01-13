@@ -30,7 +30,7 @@ common mechanisms have already been implemented. For example see
 \code{\link{ConstantRateDrop}} and \code{\link{LinearRateChangeDrop}}
 
 Only the GetDropTime and cols.needed entries are required for
-calculation, the other entries are used for printing the object
+calculation, the other entries are used for printing the object 
 
 \code{print.DropoutMechanism} methods is defined.
 }

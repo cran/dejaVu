@@ -1,10 +1,10 @@
-## ----load,message=FALSE--------------------------------------------------
+## ----load,message=FALSE-------------------------------------------------------
 library(dejaVu)
 
-## ----seed----------------------------------------------------------------
+## ----seed---------------------------------------------------------------------
 set.seed(1298711)
 
-## ----complete------------------------------------------------------------
+## ----complete-----------------------------------------------------------------
 complete <- SimulateComplete(study.time=365, 
                       number.subjects=50, 
                       event.rates=c(0.01,0.005),
@@ -12,32 +12,32 @@ complete <- SimulateComplete(study.time=365,
 print(complete)
 summary(complete)
 
-## ------------------------------------------------------------------------
+## -----------------------------------------------------------------------------
 head(complete$data)
 
 #The event times for subject with Id 1
 complete$event.times[[1]]
 
 
-## ----CRdrop--------------------------------------------------------------
+## ----CRdrop-------------------------------------------------------------------
 ConstantRateDrop(rate=0.0025,var=1)
 
-## ----drop----------------------------------------------------------------
+## ----drop---------------------------------------------------------------------
 with.MCAR.dropout <- SimulateDropout(complete,
                     drop.mechanism=ConstantRateDrop(rate=0.0025,
                                                     var=1)) #var by default=0
 
 
-## ----dropsummary---------------------------------------------------------
+## ----dropsummary--------------------------------------------------------------
 summary(with.MCAR.dropout)
 
 head(with.MCAR.dropout$data)
 
-## ----fit-----------------------------------------------------------------
+## ----fit----------------------------------------------------------------------
 my.fit <- Simfit(with.MCAR.dropout,
                  equal.dispersion=TRUE)
 
-## ------------------------------------------------------------------------
+## -----------------------------------------------------------------------------
 class(my.fit)
 
 summary(my.fit)
@@ -46,7 +46,7 @@ summary(my.fit)
 x <- summary(my.fit)
 x$pval
 
-## ----ip------------------------------------------------------------------
+## ----ip-----------------------------------------------------------------------
 
 #First get values direct from model fit
 gamma_and_mu <- my.fit$genCoeff.function(use.uncertainty=FALSE)
@@ -61,7 +61,7 @@ head(gamma_and_mu$mu, 5)
 head(my.fit$genCoeff.function(use.uncertainty=TRUE)$mu,5)
 
 
-## ----imp-----------------------------------------------------------------
+## ----imp----------------------------------------------------------------------
 imputed.data.sets <- Impute(fit = my.fit,
                             impute.mechanism = weighted_j2r(trt.weight=0),
                             N=10)
@@ -69,30 +69,30 @@ imputed.data.sets <- Impute(fit = my.fit,
 #output the number of subject dropouts in each arm 
 imputed.data.sets$dropout
 
-## ------------------------------------------------------------------------
+## -----------------------------------------------------------------------------
 sixth.data.set <- GetImputedDataSet(imputed.data.sets,index=6)
 
 summary(sixth.data.set)
 
 head(sixth.data.set$data)
 
-## ------------------------------------------------------------------------
+## -----------------------------------------------------------------------------
 sixth.fit <- Simfit(sixth.data.set,
                     family="poisson") 
                   
 summary(sixth.fit)
 
-## ------------------------------------------------------------------------
+## -----------------------------------------------------------------------------
 fitted <- Simfit(imputed.data.sets,
                  family="negbin") #negbin is the default
 
-## ------------------------------------------------------------------------
+## -----------------------------------------------------------------------------
 head(as.data.frame(fitted))
 
-## ------------------------------------------------------------------------
+## -----------------------------------------------------------------------------
 summary(fitted)
 
-## ----scenario------------------------------------------------------------
+## ----scenario-----------------------------------------------------------------
 example.scenario <- function(){ 
 
   #simulate a complete data set
@@ -118,10 +118,10 @@ example.scenario <- function(){
               complete=summary(Simfit(sim)))) #for complete data set
 }
 
-## ----rep-----------------------------------------------------------------
+## ----rep----------------------------------------------------------------------
 answer <- replicate(500,example.scenario(),simplify = FALSE)
 
-## ----extract-------------------------------------------------------------
+## ----extract------------------------------------------------------------------
 
 #answer contains a list of lists each containing 3 SimFit objects
 names(answer[[1]])
@@ -151,7 +151,7 @@ complete.answer <- extract_results(answer,name="complete",
 
 class(MI.answer)
 
-## ----scenario.df---------------------------------------------------------
+## ----scenario.df--------------------------------------------------------------
 head(as.data.frame(MI.answer))
 
 summary(dropout.answer)
@@ -165,7 +165,7 @@ x <- summary(MI.answer,use.adjusted.pval=TRUE,alpha=0.025)
 #pvalue < alpha
 x$power
 
-## ----linear--------------------------------------------------------------
+## ----linear-------------------------------------------------------------------
 drop.mec <- LinearRateChangeDrop(starting.rate=0.0025, #C in text above
                                  rate.change=0.0005, #D in text above
                                  var=1) #sigma^2 in text above by default var=0
@@ -177,23 +177,23 @@ with.MAR.dropout <- SimulateDropout(complete,
 
 
 
-## ----moreimp-------------------------------------------------------------
+## ----moreimp------------------------------------------------------------------
   weighted_j2r(trt.weight=1,delta=c(1,1.4))
 
-## ------------------------------------------------------------------------
+## -----------------------------------------------------------------------------
 covar.df <- data.frame(Id=1:100,
                        arm=c(rep(0,50),rep(1,50)),
                        pre.exa=rbinom(n=100,size=15,prob=0.4),
                        steroid=rbinom(n=100,size=1,prob=0.2))
 
 
-## ------------------------------------------------------------------------
+## -----------------------------------------------------------------------------
 covar.df$rate <- 0.001 + 0.002*covar.df$pre.exa + 
                  0.005*(1-covar.df$steroid) + 0.008*(1-covar.df$arm) 
 
 head(covar.df)  
 
-## ------------------------------------------------------------------------
+## -----------------------------------------------------------------------------
 complete.covar <- SimulateComplete(study.time=365,
                       dispersion=0.25,
                       dejaData = MakeDejaData(covar.df,arm="arm",
@@ -202,7 +202,7 @@ complete.covar <- SimulateComplete(study.time=365,
 head(complete.covar$data)
 
 
-## ----newdropout----------------------------------------------------------
+## ----newdropout---------------------------------------------------------------
 
 #we create a function which returns the new dropout mechanism
 steroidMCAR <- function(steroid.rate, non.steroid.rate,var=0){ 
@@ -235,7 +235,7 @@ steroidMCAR <- function(steroid.rate, non.steroid.rate,var=0){
 
 }
 
-## ------------------------------------------------------------------------
+## -----------------------------------------------------------------------------
 #we can view the dropout mechanism
 steroidMCAR(steroid.rate = 0.005, non.steroid.rate = 0.025)
 
@@ -246,7 +246,7 @@ dropout.covar <- SimulateDropout(complete.covar,
 
 summary(dropout.covar)
 
-## ------------------------------------------------------------------------
+## -----------------------------------------------------------------------------
 dropout.fit <- Simfit(dropout.covar,
                  equal.dispersion=TRUE,
                  covar=~pre.exa)
@@ -255,7 +255,7 @@ dropout.fit <- Simfit(dropout.covar,
 gamma_mu <- dropout.fit$genCoeff.function(use.uncertainty=TRUE)
 head(gamma_mu$mu)
 
-## ----newimp--------------------------------------------------------------
+## ----newimp-------------------------------------------------------------------
 
 #we create a function which returns the new dropout mechanism
 #arguments are parameters for probability control arm having event
@@ -334,7 +334,7 @@ my.example.impute <- function(steroid.prob,non.steroid.prob){
 #we can view the impute mechanism
 my.example.impute(steroid.prob=0.5,non.steroid.prob = 0.9)
 
-## ------------------------------------------------------------------------
+## -----------------------------------------------------------------------------
 imputed.covar <- Impute(fit = dropout.fit,
                   impute.mechanism = my.example.impute(steroid.prob=0.5,
                                        non.steroid.prob = 0.9),

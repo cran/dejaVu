@@ -4,13 +4,15 @@
 \name{simData}
 \alias{simData}
 \title{Simulated recurrent event data.}
-\format{A data frame with 500 rows and 3 variables:
+\format{
+A data frame with 500 rows and 3 variables:
 \describe{
   \item{z}{a binary variable indicating randomised treatment group}
   \item{y}{number of events observed during patient's follow-up}
   \item{fupTime}{the time in years the patient was followed up for}
   ...
-}}
+}
+}
 \source{
 Simulated data
 }

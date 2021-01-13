@@ -62,7 +62,7 @@ MakeDejaData <- function(data,arm,Id,rate=NULL){
     if(!rate %in% colnames(data)){
       stop("Invalid rate column")
     }
-    if(any(!is.numeric(data[,rate]) || data[,rate] < 0)){
+    if(any(!is.numeric(data[,rate]), (data[,rate] < 0))){
       stop("Invalid rate, must be non-negative number")
     }
   }  

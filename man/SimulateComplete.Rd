@@ -4,8 +4,13 @@
 \alias{SimulateComplete}
 \title{Simulate a complete data set}
 \usage{
-SimulateComplete(study.time, dejaData = NULL, number.subjects = NULL,
-  event.rates = NULL, dispersions)
+SimulateComplete(
+  study.time,
+  dejaData = NULL,
+  number.subjects = NULL,
+  event.rates = NULL,
+  dispersions
+)
 }
 \arguments{
 \item{study.time}{The study follow up period}
@@ -32,7 +37,7 @@ with given rates and dispersion parameters
 \details{
 Each subject's events are described by a Poisson process with a subject specific rate given by
 \code{lambda/study.time} where \code{study.time} is the study follow up period and \code{lambda}
-has a gamma distribution with \code{shape=1/dispersion} and \code{scale=dispersion*event.rate*study.time}
+has a gamma distribution with \code{shape=1/dispersion} and \code{scale=dispersion*event.rate*study.time} 
 
 Different dispersions, event.rates and number of subjects can be specified for both arms of the trial
 }

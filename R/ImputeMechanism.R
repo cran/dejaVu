@@ -39,6 +39,7 @@ print.ImputeMechanism <- function(x,...){
 ##'
 ##' @inheritParams ImputeMechanism.object 
 ##' @seealso \code{\link{ImputeMechanism.object}}
+##' @return A \code{\link{ImputeMechanism.object}}
 ##' @export
 CreateNewImputeMechanism <- function(name,cols.needed=vector("character"),impute,parameters=NULL){
   

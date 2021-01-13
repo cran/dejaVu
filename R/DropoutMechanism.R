@@ -40,6 +40,7 @@ print.DropoutMechanism <- function(x,...){
 ##' A function which creates a DropOut Mechanism object
 ##'
 ##' @inheritParams DropoutMechanism.object 
+##' @return A \code{\link{DropoutMechanism.object}}
 ##' @seealso \code{\link{DropoutMechanism.object}}
 ##' @export
 CreateNewDropoutMechanism <- function(type,text,cols.needed=vector("character"),GetDropTime,parameters=NULL){

@@ -26,7 +26,7 @@ to create a \code{ImputeSim}
 \details{
 It is possible to create user defined mechanisms, however, 
 common mechanisms have already been implemented. For example see
-\code{\link{weighted_j2r}}
+\code{\link{weighted_j2r}} 
 
 A \code{print.ImputeMechanism} method is defined.
 }

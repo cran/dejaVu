@@ -137,7 +137,7 @@ importvalidate.event.times <- function(event.times, study.time,
                   stop("event.times must be numeric")
               if(any(x<0))
                   stop("Cannot have event.times < 0")
-              if(length(x)!= 0 && sort(x) != x)
+              if((length(x)!= 0) & !identical(sort(x),x))
                   stop("Event times for subjects must be given in ascending order")
           }
       } else {
@@ -146,7 +146,7 @@ importvalidate.event.times <- function(event.times, study.time,
                     stop("event.times must be numeric")
                 if (any((x<0) | (x > study.time)))
                     stop("Cannot have event.times < 0 or > study.time")
-                if(length(x)!= 0 && sort(x) != x)
+                if((length(x)!= 0) & !identical(sort(x),x))
                     stop("Event times for subjects must be given in ascending order")
             }
         }
