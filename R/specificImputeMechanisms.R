@@ -22,6 +22,10 @@
 ##' @param delta If \code{trt.weight=1} then delta is a vector of length 2
 ##' (control.delta,treatment.delta) and the mean number of expected events for the imputed missing data is
 ##' multiplied by the appropriate delta 
+##' @param proper If \code{proper=TRUE} then proper imputation is performed, in which each imputation
+##' is created based on parameters values drawn from the (approximate) posterior distribution of the
+##' imputation model. If \code{proper=FALSE}, improper imputation is performed. This means all 
+##' imputed datasets are generated conditional on the maximum likelihood estimates of the parameters.
 ##' @return An \code{ImputeMechanism} object
 ##' @seealso \code{\link{ImputeMechanism.object}}
 ##' 
@@ -34,7 +38,7 @@
 ##' imps <- Impute(fit, weighted_j2r(trt.weight=0), 10)
 ##' 
 ##' @export
-weighted_j2r <- function(trt.weight,delta=c(1,1)){
+weighted_j2r <- function(trt.weight,delta=c(1,1),proper=TRUE){
   #first validate the arguments
   
   if(!.internal.is.finite.number(trt.weight) | (trt.weight < 0) | (trt.weight > 1)){
@@ -60,7 +64,7 @@ weighted_j2r <- function(trt.weight,delta=c(1,1)){
   #events then the vector should be numeric(0))
   #2) new.censored.times - the time at which subjects are censored in the imputed data set
   f <- function(fit){
-    return(list(newevent.times=.internal.impute(fit,treatment.p.choice,delta),
+    return(list(newevent.times=.internal.impute(fit,treatment.p.choice,delta,proper),
                 new.censored.times=pmax(fit$singleSim$data$censored.time,fit$singleSim$study.time)
     ))
     
@@ -73,7 +77,7 @@ weighted_j2r <- function(trt.weight,delta=c(1,1)){
 }
 
 
-.internal.impute <- function(fit,treatment.p.choice,delta){
+.internal.impute <- function(fit,treatment.p.choice,delta,proper){
   # performs the weighted_j2r method using the given SimFit object
   # a function which chooses the appropriate weighting on the treatment arm 
   # and the scaling factors delta
@@ -86,7 +90,7 @@ weighted_j2r <- function(trt.weight,delta=c(1,1)){
   #@return returns a list of vectors, the imputed event times for each subject (if subject has no new imputed
   #events then the vector should be numeric(0))
   
-  gamma_mu <- fit$genCoeff.function()
+  gamma_mu <- fit$genCoeff.function(use.uncertainty=proper)
   
   #the data frame from the SimFit object  
   df <- fit$singleSim$data

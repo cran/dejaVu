@@ -4,6 +4,11 @@
 ##' the rate before and dropout are both equal to the control (reference) estimated rate.
 ##' This corresponds to what is usually termed the copy reference assumption.
 ##' 
+##' @param proper If \code{proper=TRUE} then proper imputation is performed, in which each imputation
+##' is created based on parameters values drawn from the (approximate) posterior distribution of the
+##' imputation model. If \code{proper=FALSE}, improper imputation is performed. This means all 
+##' imputed datasets are generated conditional on the maximum likelihood estimates of the parameters.
+##' 
 ##' @return An \code{ImputeMechanism} object
 ##' @seealso \code{\link{ImputeMechanism.object}}
 ##' @export
@@ -16,14 +21,14 @@
 ##' fit <- Simfit(sim.with.MCAR.dropout)
 ##' imps <- Impute(fit, copy_reference(), 10)
 ##'
-copy_reference <- function() {
+copy_reference <- function(proper=TRUE) {
 
   #A function which takes SimFit object and outputs a list of 2 elements
   #1) newevent.times a list of vectors, the imputed event times for each subject (if subject has no new imputed
   #events then the vector should be numeric(0))
   #2) new.censored.times - the time at which subjects are censored in the imputed data set
   f <- function(fit){
-    return(list(newevent.times=.copy_ref_impute(fit),
+    return(list(newevent.times=.copy_ref_impute(fit,proper),
                 new.censored.times=pmax(fit$singleSim$data$censored.time,fit$singleSim$study.time)
     ))
     
@@ -35,7 +40,7 @@ copy_reference <- function() {
 }
 
 
-.copy_ref_impute <- function(fit){
+.copy_ref_impute <- function(fit,proper){
   # performs the copy reference method using the given SimFit object
   # returns the imputed event times for each subjects as a list of vectors
   
@@ -43,7 +48,7 @@ copy_reference <- function() {
   #@return returns a list of vectors, the imputed event times for each subject (if subject has no new imputed
   #events then the vector should be numeric(0))
   
-  gamma_mu <- fit$genCoeff.function()
+  gamma_mu <- fit$genCoeff.function(use.uncertainty=proper)
   
   #the data frame from the SimFit object  
   df <- fit$singleSim$data

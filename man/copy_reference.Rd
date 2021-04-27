@@ -4,7 +4,13 @@
 \alias{copy_reference}
 \title{Create a copy reference \code{ImputeMechanism} object}
 \usage{
-copy_reference()
+copy_reference(proper = TRUE)
+}
+\arguments{
+\item{proper}{If \code{proper=TRUE} then proper imputation is performed, in which each imputation
+is created based on parameters values drawn from the (approximate) posterior distribution of the
+imputation model. If \code{proper=FALSE}, improper imputation is performed. This means all 
+imputed datasets are generated conditional on the maximum likelihood estimates of the parameters.}
 }
 \value{
 An \code{ImputeMechanism} object

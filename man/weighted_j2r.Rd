@@ -4,7 +4,7 @@
 \alias{weighted_j2r}
 \title{Create a weighted_j2r \code{ImputeMechanism} object}
 \usage{
-weighted_j2r(trt.weight, delta = c(1, 1))
+weighted_j2r(trt.weight, delta = c(1, 1), proper = TRUE)
 }
 \arguments{
 \item{trt.weight}{See details}
@@ -12,6 +12,11 @@ weighted_j2r(trt.weight, delta = c(1, 1))
 \item{delta}{If \code{trt.weight=1} then delta is a vector of length 2
 (control.delta,treatment.delta) and the mean number of expected events for the imputed missing data is
 multiplied by the appropriate delta}
+
+\item{proper}{If \code{proper=TRUE} then proper imputation is performed, in which each imputation
+is created based on parameters values drawn from the (approximate) posterior distribution of the
+imputation model. If \code{proper=FALSE}, improper imputation is performed. This means all 
+imputed datasets are generated conditional on the maximum likelihood estimates of the parameters.}
 }
 \value{
 An \code{ImputeMechanism} object

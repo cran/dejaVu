@@ -1,7 +1,7 @@
 Package: dejaVu
 Type: Package
 Title: Multiple Imputation for Recurrent Events
-Version: 0.2.1
+Version: 0.3.0
 Authors@R: c(
           person("Nikolas", "Burkoff", 
             role=c("aut")),
@@ -25,11 +25,12 @@ Depends: R (>= 3.1.0)
 Imports: MASS, stats
 VignetteBuilder: knitr
 RoxygenNote: 7.1.1
+Encoding: UTF-8
 NeedsCompilation: no
-Packaged: 2021-01-08 23:27:50 UTC; JWB-beast
+Packaged: 2021-04-27 12:01:21 UTC; jwb13
 Author: Nikolas Burkoff [aut],
   Paul Metcalfe [aut],
   Jonathan Bartlett [aut, cre],
   David Ruau [aut]
 Repository: CRAN
-Date/Publication: 2021-01-13 11:50:16 UTC
+Date/Publication: 2021-04-27 12:40:02 UTC
