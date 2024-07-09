@@ -62,7 +62,7 @@ GetImputedDataSet <- function(imputeSim,index){
 # validation of GetImputedDatSet function
 # see that function for parameter details
 ValidateGetImputeDSArgs <- function(imputeSim,index){
-  if(class(imputeSim)!="ImputeSim"){
+  if(inherits(imputeSim,"ImputeSim")==FALSE){
     stop("Invalid argument: imputeSim argument must be an ImputeSim object")
   }
   

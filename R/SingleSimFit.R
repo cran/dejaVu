@@ -129,7 +129,7 @@ subjectsPerArm.SingleSimFit <- function(x){
 # check the arguments to Impute function are valid
 validateImputeArguments <- function(fit,impute.mechanism,N){
   
-  if(class(fit)!="SingleSimFit"){
+  if(inherits(fit,"SingleSimFit")==FALSE){
     stop("Invalid fit argument, must be of class SingleSimFit")
   }
   
@@ -137,7 +137,7 @@ validateImputeArguments <- function(fit,impute.mechanism,N){
     stop("Cannot impute using this SingleSimFit object (a negative binomial model was not fit)")
   }
   
-  if(class(impute.mechanism)!="ImputeMechanism"){
+  if(inherits(impute.mechanism,"ImputeMechanism")==FALSE){
     stop("Invalid impute.mechanism argument, must one of class ImputeMechanism")
   }
   

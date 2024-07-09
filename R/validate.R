@@ -30,7 +30,7 @@ ValidateSimCompleteArgs <- function(dejaData,study.time,dispersions){
     stop("Invalid study.time argument it must be a single positive finite numeric value")
   }
   
-  if(class(dejaData) != "DejaData"){
+  if(inherits(dejaData,"DejaData")==FALSE){
     stop("Invalid dejaData argument")
   }
   
@@ -54,11 +54,11 @@ ValidateSimCompleteArgs <- function(dejaData,study.time,dispersions){
 # for argumenets see SimulateDropout function
 # if invalid argument an exception is thrown
 validateSimulateDropout <- function(simComplete,drop.mechanism){
-  if(class(simComplete)!="SingleSim"){
+  if(inherits(simComplete,"SingleSim")==FALSE){
     stop("Invalid argument: simComplete must be of class SingleSim")
   }
   
-  if(class(drop.mechanism)!="DropoutMechanism"){
+  if(inherits(drop.mechanism,"DropoutMechanism")==FALSE){
     stop("Invalid argument: drop.mechanism must be of class DropoutMechanism")
   }
   
@@ -100,7 +100,7 @@ ValidateSimFitArguments <- function(family,equal.dispersion){
 #does not include the treatment arm 
 validatecovar <- function(covar){
   
-  if(class(covar)!="formula") stop("Invalid covar is not of type formula")
+  if(inherits(covar,"formula")==FALSE) stop("Invalid covar is not of type formula")
   
   if(length(.getResponse(covar))!=0){
     stop("covar cannot have any variables on the left hand side.")

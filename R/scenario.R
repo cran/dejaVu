@@ -75,7 +75,7 @@ Validate.adjusted.pval <- function(x,use.adjusted.pval){
    stop("Invalid argument use.adjusted.pval")
   }
 
-  if(use.adjusted.pval && class(x[[1]])=="summary.SingleSimFit") {
+  if(use.adjusted.pval && (inherits(x[[1]],"summary.SingleSimFit")==TRUE)) {
     stop("Invalid arguments: cannot use adjusted.pval if multiple imputed test statistic is not used")
   }
 }

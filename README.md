@@ -1,6 +1,5 @@
 # dejaVu
 
-[![Build Status](https://travis-ci.org/jwb133/dejaVu.svg?branch=master)](https://travis-ci.org/jwb133/dejaVu)
 [![CRAN_Status_Badge](https://www.r-pkg.org/badges/version/dejaVu)](https://cran.r-project.org/package=dejaVu)
 [![CRAN RStudio mirror downloads](https://cranlogs.r-pkg.org/badges/dejaVu)](https://cran.r-project.org/package=dejaVu)
 [![CRAN RStudio mirror downloads](https://cranlogs.r-pkg.org/badges/grand-total/dejaVu)](https://cran.r-project.org/package=dejaVu)

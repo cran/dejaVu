@@ -58,7 +58,7 @@ ImportSim <- function(dejaData, event.times, status, study.time,
     stop("Invalid study.time argument it must be a single positive finite numeric value")
   }
   
-  if(class(dejaData)!= "DejaData"){
+  if(inherits(dejaData,"DejaData")==FALSE){
     stop("dejaData must be a DejaData object")
   }
   
